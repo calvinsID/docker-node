@@ -26,7 +26,7 @@ jobs:
       - name: Log in to container registry
         uses: docker/login-action@v1
         with:
-          registry: calchaacr.azurecr.io
+          
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
@@ -34,7 +34,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: calchaacr.azurecr.io/calcha-prod-github-action:${{ github.sha }}
+          tags: calvinch4n/calcha-prod-github-action:${{ github.sha }}
           file: ./14/bullseye/Dockerfile
 
 
@@ -58,4 +58,4 @@ jobs:
             az provider register --namespace Microsoft.Web
             az extension add --source https://workerappscliextension.blob.core.windows.net/azure-cli-extension/containerapp-0.1.12-py2.py3-none-any.whl --yes
             echo "Starting Deploying"
-            az containerapp update -n calcha-prod-github-action -g calcha-prod-containerapp -i calchaacr.azurecr.io/calcha-prod-github-action:${{ github.sha }} --registry-login-server calchaacr.azurecr.io --registry-username  ${{ secrets.REGISTRY_USERNAME }} --registry-password ${{ secrets.REGISTRY_PASSWORD }} --debug
+            az containerapp update -n calcha-prod-github-action -g calcha-prod-containerapp -i calvinch4n/calcha-prod-github-action:${{ github.sha }}  --registry-username  ${{ secrets.REGISTRY_USERNAME }} --registry-password ${{ secrets.REGISTRY_PASSWORD }} --debug
